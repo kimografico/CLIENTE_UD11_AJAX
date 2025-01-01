@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="styles.css">
+    <title>Práctica 2 - AJAX</title>
+  </head>
+  <body>
+    <main>
+      <h2>Entrada de datos</h2>
+      <form action="#">
+        <label>Número de segundos</label>
+        <input id="numsecs" autofocus></input><br/><br/>
+        <label>Número de usuario</label>
+        <input id="user"></input>
+        <br/><br/>
+        <button>Ejecutar</button>
+      </form>
+      <div style="display: block">
+        <h2>Obtención usuario</h2>
+        <label>ID = </label>
+        <span id="id"></span><br />
+        <label>Email = </label>
+        <span id="email"></span><br />
+      </div>
+      <div style="display: block">
+        <h2>Creación usuario</h2>
+        <label>First Name = </label>
+        <span id="name"></span><br />
+      </div>
+      <div style="display: block">
+        <h2>Resultado Operaciones</h2>
+        <label>HTTP Status = </label>
+        <span id="status"></span><br />
+      </div>
+    </main>
+    <script src="scripts/ajax.js"> </script>
+  </body>
+</html>

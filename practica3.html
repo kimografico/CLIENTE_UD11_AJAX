@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Práctica 3 - AEMET</title>
+</head>
+
+<body>
+    <br><h1 class="tituloAEMET">Imagen del día de la AEMET</h1>
+    <main>
+        <form class="formMapa" id="formMapa">
+            <label for="apikey">Pega tu API KEY</label><br>
+            <textarea rows="8" name="apikey" id="apikey"></textarea>
+            <button type="submit">Cargar Mapa</button>
+            <div id="err_msg" style="color: red; display: none;"></div>
+        </form>
+        <div id="mapcontainer"></div>
+    </main>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("formMapa").addEventListener("submit", cargarMapa);
+        });
+
+        async function cargarMapa(event) {
+            event.preventDefault();
+
+            const err_msg = document.getElementById("err_msg");
+            err_msg.style.display = "none";
+
+            try {
+                // let apikey = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJraW1vLmdyYWZpY29AZ21haWwuY29tIiwianRpIjoiNzIzYmRhYzMtM2JkZC00ODU5LTgxMWMtNzdkNDQ0NGM2NGU5IiwiaXNzIjoiQUVNRVQiLCJpYXQiOjE3MzU3NDEzOTUsInVzZXJJZCI6IjcyM2JkYWMzLTNiZGQtNDg1OS04MTFjLTc3ZDQ0NDRjNjRlOSIsInJvbGUiOiIifQ.f6xSag8LzvLau_RbvMh5cgsXqEk-j4nD6Bd1LWyFruM';
+                let apikey = document.getElementById("apikey").value;
+                if (apikey == '') {
+                    throw new Error("El campo API KEY está vacío");
+                } else {
+                    let response;
+                    try {
+                        response = await fetch('https://opendata.aemet.es/opendata/api/mapasygraficos/analisis' + '?api_key=' + apikey);
+                    } catch (error) {
+                        throw new Error('⚠️ No se ha podido comunicar con la API. Por favor, revisa tu clave');
+                    }
+                    const datos = await response.json();
+                    if (!response.ok) {
+                        if (response.status === 401) {
+                            throw new Error("Clave de API no válida");
+                        } else {
+                            throw new Error(`Error HTTP: ${response.status} - ${response.statusText}`);
+                        }
+                    }
+                    let mapa = datos.datos;
+                    let mapaImg = document.createElement('img');
+                    mapaImg.src = mapa;
+                    mapaImg.className = 'mapa';
+                    document.getElementById('mapcontainer').appendChild(mapaImg);
+
+                    document.getElementById("formMapa").style.display = 'none';
+
+                }
+            } catch (error) {
+                console.error(error);
+                err_msg.style.display = "block";
+                err_msg.textContent = error.message;
+            
+            }
+        }
+    </script>
+</body>
+
+</html>

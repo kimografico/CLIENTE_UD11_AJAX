@@ -1,0 +1,131 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background: beige;
+    display: grid;
+    place-items: center;
+    min-height: 50vh;
+    font-family: sans-serif;
+}
+
+body > div {
+    background: white;
+    padding: 15px;
+    padding-right: 50px;
+    border-radius: 25px;
+    box-shadow: 5px 5px 25px sienna;
+    display: flex;
+    gap: 25px;
+}
+
+body > div > img{
+    border-radius: 15px;
+    box-shadow: 2px 2px 10px teal;
+    transition: transform 0.75s ease;
+}
+
+body > div:hover > img{
+    transform: scale(1.5) translate(-25px);
+}
+
+body > div b{
+    font-size: 1.75rem;
+}
+
+body > div p{
+    margin-bottom: 10px;
+}
+
+body > div hr{
+    margin-bottom: 10px;
+    margin-top: -5px;
+    border: none;
+    height: 2px;
+    background: slateblue;
+}
+
+body > div a{
+    color: slateblue;
+    transition: 0.5s;
+}
+
+body > div a:hover{
+    color: blue;
+}
+
+main h2{
+    margin-bottom: 5px;
+    margin-top: 25px;
+}
+
+main form {
+    background: white;
+    padding: 25px;
+    padding-right: 50px;
+    border-radius: 25px;
+    box-shadow: 5px 5px 25px sienna;
+    margin: 25px 0 50px 0;
+}
+
+main form button{
+    padding: 10px;
+    border-radius: 20px;
+    border: 2px solid grey;
+    width: 100%;
+    background: whitesmoke;
+    transition: 0.25s;
+}
+
+main form button:hover{
+    border: 2px solid green;
+    cursor: pointer;
+    background: ivory;
+}
+
+main form button:active{
+    border: 2px solid darkslategrey;
+    background: Gainsboro;
+}
+
+.formMapa{
+    text-align: center;
+}
+
+.formMapa textarea{
+    margin: 5px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid grey;
+    text-align: center;
+    resize:none;
+    color: slateblue;
+}
+
+.formMapa button{
+    margin-top: 10px;
+}
+
+.mapa {
+    width: 65vw;
+    max-height: 125vh;
+    object-fit: contain;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.tituloAEMET{
+    z-index: 99999;
+    position: absolute;
+    top: 10px;
+}
+
+#err_msg{
+    margin-top: 20px;
+}

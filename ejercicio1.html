@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1</title>
+</head>
+
+<body>
+    <script>
+        let userData = null;
+        async function obtenerDatos(callback) {
+            try {
+                const response = await fetch('https://reqres.in/api/users?page=1');
+                if (!response.ok){
+                    throw new Error ('Error HTTP: ' + response.status);
+                }
+                const data = await response.json();
+                return data.data;
+            } catch (e) {
+                console.error('Error: ' + e)
+            }
+        }
+
+        async function mostrarDatos() {
+        let userData = await obtenerDatos(); // Trae los datos del fetch de forma asíncrona
+        if (userData) {
+            userData.forEach(element => {
+                console.log(element.first_name + ' ' + element.last_name);
+            });
+        }
+    }
+
+        mostrarDatos();
+
+        // Como la recepción de datos es asíncrona, no puedo usar los datos recibidos tal cual
+        // Tengo que usarlos dentro de la propia función asíncrona, o como otra función callback.
+        // No tengo claro si esto hace que toda la aplicación tenga que gestionarse a base de callbacks
+        // ¿Quizá eso sea parte de lo que llaman callback hell?
+        // Mejor cambio el callback por otra función asíncrona usando otra vez await. Queda mas corto.
+
+    </script>
+</body>
+
+</html>
