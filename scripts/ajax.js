@@ -24,8 +24,7 @@ function clearFields() {
 
 async function procesarFetch(numsecs, user) {
   try {
-    const response = await fetch(BASE_URL + user + 'caca');
-
+    const response = await fetch(BASE_URL + user);
     if (!response.ok) {
       throw new Error(response.status);
     }
@@ -33,7 +32,7 @@ async function procesarFetch(numsecs, user) {
     let datos = await response.json();
     datos = datos.data;
 
-    if (datos && datos.data) {
+    if (datos) {
       setTimeout(() => {
         document.getElementById("id").innerText = datos.id;
         document.getElementById("email").innerText = datos.email;
